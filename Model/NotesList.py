@@ -34,4 +34,5 @@ class NotesList:
             self.current_index += 1
             return result
         else:
+            self.current_index = 0
             raise StopIteration
