@@ -19,15 +19,17 @@ class App:
         with open("data.csv", "w", newline="") as data:
             writer = csv.writer(data)
             for note in self.note_list:
-                writer.writerow([note.get_title(), note.get_description()])
+                writer.writerow([note.get_title(), note.get_description(), note.get_date()])
 
     def read_from_csv(self):
         with open("data.csv", 'r') as file:
             self.note_list = NotesList()
             csv_reader = csv.reader(file)
             for row in csv_reader:
-                if len(row) == 2:
+                if len(row) == 3:
                     title = row[0]
                     content = row[1]
+                    date = row[2]
                     note = Note(title, content)
+                    note.set_date(date)
                     self.note_list.add_note(note)
