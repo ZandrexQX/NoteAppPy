@@ -1,4 +1,13 @@
 class Note:
     def __init__(self, title, description):
-        self.title = title
-        self.description = description
+        self.__title = title
+        self.__description = description
+
+    def set_title(self, title):
+        self.__title = title
+    def get_title(self):
+        return self.__title
+    def set_description(self, decription):
+        self.__description = decription
+    def get_description(self):
+        return self.__description
