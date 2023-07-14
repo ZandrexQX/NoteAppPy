@@ -23,12 +23,17 @@ while flag:
             app.add_list()
             print(f"Заметка {title} добавлена")
         case "2":
-            pass
+            title = input("Введите название редактируемой заметки: ")
+            if app.note_list.check_note(title):
+                note = app.note_list.get_note(title)
+                descr = input(f"Заметка {title} найдена. Введите новое описание: ")
+                note.set_description(descr)
+                print("Заметка изменена")
         case "3":
             note = input("Введите название удаляемой заметки: ")
-            if app.note_list.check_note(note):
-                app.del_note(note)
-                print(f"Заметка {note} удалена")
+            if app.note_list.check_note(title):
+                app.del_note(title)
+                print(f"Заметка {title} удалена")
             else:
                 print("Такой заметки нет")
         case "4":

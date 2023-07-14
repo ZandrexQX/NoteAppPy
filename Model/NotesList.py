@@ -19,6 +19,12 @@ class NotesList:
                 return True
         return False
 
+    def get_note(self, title):
+        for note in self.__notesList:
+            if note.get_title() == title:
+                return note
+                break
+
     def remove_by_title(self, title):
         for note in self.__notesList:
             if note.get_title() == title:
