@@ -30,7 +30,7 @@ while flag:
                 note.set_description(descr)
                 print(Fore.GREEN + "Заметка изменена")
         case "3":
-            note = input(Fore.BLUE + "Введите название удаляемой заметки: ")
+            title = input(Fore.BLUE + "Введите название удаляемой заметки: ")
             if app.note_list.check_note(title):
                 app.del_note(title)
                 print(Fore.GREEN + f"Заметка {title} удалена")
