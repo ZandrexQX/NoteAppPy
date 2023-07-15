@@ -26,16 +26,16 @@ def main(page: ft.Page):
                        )
     info_text = ft.Text()
 
-    def button_clicked(e):
-        # tb1.value = note.get_title()
-        # tb2.value = note.get_description()
+    def button_clicked(note):
+        tb1.value = note.get_title()
+        tb2.value = note.get_description()
         page.update()
 
     def note_update():
         notes.controls.clear()
         count = 0
         # List notes
-        for i in range(10):
+        for note in app.note_list.get_list():
             # a = app.note_list.get_list()[count]
             # count += 1
             notes.controls.append(
@@ -49,8 +49,8 @@ def main(page: ft.Page):
                         offset=ft.Offset(0, 0),
                         blur_style=ft.ShadowBlurStyle.OUTER,
                     ),
-                    on_click=button_clicked, # not work
-                    # content=ft.Text(note.get_title())
+                    on_click=lambda _: button_clicked(note), # not work
+                    content=ft.Text(note.get_title())
                 )
             )
 
