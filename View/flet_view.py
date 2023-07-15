@@ -93,131 +93,143 @@ def main(page: ft.Page):
         note_update()
         page.update()
 
-
-    container = ft.Container(
-        width=600, height=400,
+    cont_notes = ft.Container(
+        width=400, height=230, border_radius=5, padding=20,
         content=ft.Column(
             controls=[
-                ft.Container(
-                    width=600, height=250, bgcolor=FWG, padding=10, border_radius=10,
-                    shadow=ft.BoxShadow(
-                        blur_radius=5,
-                        color=ft.colors.BLACK,
-                        offset=ft.Offset(0, 0),
-                        blur_style=ft.ShadowBlurStyle.OUTER,
-                    ),
-                    content=ft.Row(
-                        controls=[
-                            #Notes
-                            ft.Container(
-                                width=400, height=230, border_radius=5, padding=20,
-                                content=ft.Column(
-                                    controls=[
-                                        tb1,
-                                        tb2
-                                    ]
-                                )
-                            ),
-                            # Buttons
-                            ft.Container(
-                                width=170, height=230, border_radius=5, padding=6,
-                                content=ft.Column(
-                                    controls=[
-                                        ft.ElevatedButton(text="Создать    ", bgcolor=BC,
-                                                          on_click=button_create, width=200,
-                                                          icon=ft.icons.FILE_DOWNLOAD_DONE_SHARP,
-                                                          color=BL
-                                                          ),
-                                        ft.ElevatedButton(text="Изменить", bgcolor=BC,
-                                                          on_click=button_edit, width=200,
-                                                          icon=ft.icons.EDIT_NOTE, color=BL
-                                                          ),
-                                        ft.ElevatedButton(text="Удалить   ", bgcolor=BC,
-                                                          on_click=button_delete, width=200,
-                                                          icon=ft.icons.DELETE_SWEEP_OUTLINED,
-                                                          color=BL
-                                                          ),
-                                        ft.ElevatedButton(text="Сохранить", bgcolor=BC,
-                                                          on_click=button_save, width=200,
-                                                          icon=ft.icons.FILE_DOWNLOAD_OUTLINED,
-                                                          color=BL
-                                                          ),
-                                        ft.ElevatedButton(text="Загрузить ", bgcolor=BC,
-                                                          on_click=button_load, width=200,
-                                                          icon=ft.icons.FILE_UPLOAD_OUTLINED,
-                                                          color=BL
-                                                          ),
-                                    ]
-                                )
-                            )
-                        ]
-                    )
-                ),
-                # Down
-                ft.Container(
-                    width=600, height=300, bgcolor=FWG, border_radius=10,
-                    shadow=ft.BoxShadow(
-                        blur_radius=5,
-                        color=ft.colors.BLACK,
-                        offset=ft.Offset(0, 0),
-                        blur_style=ft.ShadowBlurStyle.OUTER,
-                    ),
-                    padding=20,
-                    content=ft.Row(
-                        controls=[
-                            # info
-                            ft.Container(
-                                width=200, height=250, bgcolor=WH, border_radius=5, padding=10,
-                                content=info_text,
-                                shadow=ft.BoxShadow(
-                                    spread_radius=2,
-                                    color=ft.colors.BLUE_GREY_900,
-                                ),
-                            ),
-                            #Notes list
-                            ft.Container(
-                                width=350, height=250, bgcolor=BG, border_radius=5, padding=20,
-                                content=notes,
-                                shadow=ft.BoxShadow(
-                                    spread_radius=2,
-                                    blur_radius=5,
-                                    color=ft.colors.BLACK,
-                                    offset=ft.Offset(0, 0),
-                                    blur_style=ft.ShadowBlurStyle.OUTER,
-                                ),
-                            ),
-                        ]
-                    )
+                tb1,
+                tb2
+            ]
+        )
+    )
 
-                ),
+    cont_buttons = ft.Container(
+        width=170, height=230, border_radius=5, padding=6,
+        content=ft.Column(
+            controls=[
+                ft.ElevatedButton(text="Создать    ", bgcolor=BC,
+                                  on_click=button_create, width=200,
+                                  icon=ft.icons.FILE_DOWNLOAD_DONE_SHARP,
+                                  color=BL
+                                  ),
+                ft.ElevatedButton(text="Изменить", bgcolor=BC,
+                                  on_click=button_edit, width=200,
+                                  icon=ft.icons.EDIT_NOTE, color=BL
+                                  ),
+                ft.ElevatedButton(text="Удалить   ", bgcolor=BC,
+                                  on_click=button_delete, width=200,
+                                  icon=ft.icons.DELETE_SWEEP_OUTLINED,
+                                  color=BL
+                                  ),
+                ft.ElevatedButton(text="Сохранить", bgcolor=BC,
+                                  on_click=button_save, width=200,
+                                  icon=ft.icons.FILE_DOWNLOAD_OUTLINED,
+                                  color=BL
+                                  ),
+                ft.ElevatedButton(text="Загрузить ", bgcolor=BC,
+                                  on_click=button_load, width=200,
+                                  icon=ft.icons.FILE_UPLOAD_OUTLINED,
+                                  color=BL
+                                  ),
+            ]
+        )
+    )
+
+    cont_up = ft.Container(
+        width=600, height=250, bgcolor=FWG, padding=10, border_radius=10,
+        shadow=ft.BoxShadow(
+            blur_radius=5,
+            color=ft.colors.BLACK,
+            offset=ft.Offset (0, 0),
+            blur_style=ft.ShadowBlurStyle.OUTER,
+        ),
+        content=ft.Row(
+            controls=[
+                # Notes
+                cont_notes,
+                # Buttons
+                cont_buttons
+            ]
+        )
+    )
+    cont_info = ft.Container(
+        width=200, height=250, bgcolor=WH, border_radius=5, padding=10,
+        content=info_text,
+        shadow=ft.BoxShadow(
+            spread_radius=2,
+            color=ft.colors.BLUE_GREY_900,
+        ),
+    )
+    cont_list = ft.Container(
+        width=350, height=250, bgcolor=BG, border_radius=5, padding=20,
+        content=notes,
+        shadow=ft.BoxShadow(
+            spread_radius=2,
+            blur_radius=5,
+            color=ft.colors.BLACK,
+            offset=ft.Offset(0, 0),
+            blur_style=ft.ShadowBlurStyle.OUTER,
+        ),
+    )
+
+    cont_down = ft.Container(
+        width=600, height=300, bgcolor=FWG, border_radius=10,
+        shadow=ft.BoxShadow(
+            blur_radius=5,
+            color=ft.colors.BLACK,
+            offset=ft.Offset(0, 0),
+            blur_style=ft.ShadowBlurStyle.OUTER,
+        ),
+        padding=20,
+        content=ft.Row(
+            controls=[
+                # info
+                cont_info,
+                # Notes list
+                cont_list,
+            ]
+        )
+
+    )
+
+    cont_text_down = ft.Row(
+        spacing=4,
+        alignment="center",
+        controls=[
+            # title
+            ft.Column(
+                alignment="center",
+                horizontal_alignment="start",
+                controls=[
+                    ft.Text(
+                        "Notes App",
+                        weight="bold",
+                    )
+                ],
+            ),
+            ft.Column(
+                alignment="center",
+                horizontal_alignment="start",
+                controls=[
+                    ft.Text(
+                        "- Zandrex",
+                        weight="bold",
+                    )
+                ],
+            )
+        ]
+    )
+
+    container = ft.Container(
+        width=600, height=600,
+        content=ft.Column(
+            controls=[
+                # Up
+                cont_up,
+                # Down
+                cont_down,
                 # Text App
-                ft.Row(
-                        spacing=4,
-                        alignment="center",
-                        controls=[
-                            #title
-                            ft.Column(
-                                alignment="center",
-                                horizontal_alignment="start",
-                                controls=[
-                                    ft.Text(
-                                        "Notes App",
-                                        weight="bold",
-                                    )
-                                ],
-                            ),
-                            ft.Column(
-                                alignment="center",
-                                horizontal_alignment="start",
-                                controls=[
-                                    ft.Text(
-                                        "- Zandrex",
-                                        weight="bold",
-                                    )
-                                ],
-                            )
-                        ]
-                )
+                cont_text_down
             ]
         )
     )
