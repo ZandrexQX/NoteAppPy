@@ -1,5 +1,5 @@
 from NotesApp.Presenter.App import *
-from colorama import Fore, Back, Style
+from colorama import Fore
 print(Fore.BLUE + "Note_console")
 
 flag = True
