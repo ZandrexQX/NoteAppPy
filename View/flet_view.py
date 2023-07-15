@@ -1,5 +1,7 @@
 import flet as ft
+from NotesApp.Presenter.App import *
 
+app = App()
 def main(page: ft.Page):
     page.title = "Notes App"
     page.window_width = "640"
@@ -24,23 +26,67 @@ def main(page: ft.Page):
                        )
     info_text = ft.Text()
 
+    def note_update():
+        notes.controls.clear()
+        for note in app.note_list.get_list():
+            notes.controls.append(
+                ft.Container(
+                    width="295", height="30", bgcolor=BC, border_radius=14,
+                    margin=ft.margin.symmetric(horizontal=5, vertical=5),
+                    alignment=ft.alignment.center,
+                    shadow=ft.BoxShadow(
+                        blur_radius=5,
+                        color=ft.colors.BLACK,
+                        offset=ft.Offset(0, 0),
+                        blur_style=ft.ShadowBlurStyle.OUTER,
+                    ),
+                    content=ft.Text(note.get_title())
+                )
+            )
     def button_clicked(e):
         info_text.value = f"{tb1.value}"
         page.update()
 
-    for i in range(10):
-        notes.controls.append(
-            ft.Container(
-                width="295", height="30", bgcolor=BC, border_radius=14,
-                margin=ft.margin.symmetric(horizontal=5, vertical=5),
-                shadow=ft.BoxShadow(
-                    blur_radius=5,
-                    color=ft.colors.BLACK,
-                    offset=ft.Offset(0, 0),
-                    blur_style=ft.ShadowBlurStyle.OUTER,
-                ),
-            )
-        )
+    def button_create(e):
+        app.create_note(tb1.value, tb2.value)
+        app.add_list()
+        info_text.value = f"Заметка {tb1.value} создана"
+        note_update()
+        page.update()
+
+    def button_edit(e):
+        if app.note_list.check_note(tb1.value):
+            note = app.note_list.get_note(tb1.value)
+            descr = tb2.value
+            note.set_description(descr)
+            info_text.value = f"Заметка {tb1.value} изменена"
+            page.update()
+        else:
+            info_text.value = f"Заметки {tb1.value} нет"
+            page.update()
+
+    def button_delete(e):
+        if app.note_list.check_note(tb1.value):
+            app.del_note(tb1.value)
+            info_text.value = f"Заметка {tb1.value} удалена"
+            note_update()
+            page.update()
+        else:
+            info_text.value = f"Заметки {tb1.value} нет"
+            page.update()
+
+    def button_save(e):
+        app.save_notes()
+        info_text.value = f"Заметки сохранены"
+        page.update()
+
+    def button_load(e):
+        app.read_from_csv()
+        info_text.value = f"Заметки загружены"
+        note_update()
+        page.update()
+
+
 
     container = ft.Container(
         width="600", height="400",
@@ -72,26 +118,26 @@ def main(page: ft.Page):
                                 content=ft.Column(
                                     controls=[
                                         ft.ElevatedButton(text="Создать    ", bgcolor=BC,
-                                                          on_click=button_clicked, width=200,
+                                                          on_click=button_create, width=200,
                                                           icon=ft.icons.FILE_DOWNLOAD_DONE_SHARP,
                                                           color=BL
                                                           ),
                                         ft.ElevatedButton(text="Изменить", bgcolor=BC,
-                                                          on_click=button_clicked, width=200,
+                                                          on_click=button_edit, width=200,
                                                           icon=ft.icons.EDIT_NOTE, color=BL
                                                           ),
                                         ft.ElevatedButton(text="Удалить   ", bgcolor=BC,
-                                                          on_click=button_clicked, width=200,
+                                                          on_click=button_delete, width=200,
                                                           icon=ft.icons.DELETE_SWEEP_OUTLINED,
                                                           color=BL
                                                           ),
                                         ft.ElevatedButton(text="Сохранить", bgcolor=BC,
-                                                          on_click=button_clicked, width=200,
+                                                          on_click=button_save, width=200,
                                                           icon=ft.icons.FILE_DOWNLOAD_OUTLINED,
                                                           color=BL
                                                           ),
                                         ft.ElevatedButton(text="Загрузить ", bgcolor=BC,
-                                                          on_click=button_clicked, width=200,
+                                                          on_click=button_load, width=200,
                                                           icon=ft.icons.FILE_UPLOAD_OUTLINED,
                                                           color=BL
                                                           ),

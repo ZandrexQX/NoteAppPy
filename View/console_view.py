@@ -29,6 +29,8 @@ while flag:
                 descr = input(Fore.YELLOW + f"Заметка {title} найдена. Введите новое описание: ")
                 note.set_description(descr)
                 print(Fore.GREEN + "Заметка изменена")
+            else:
+                print(Fore.RED + "Такой заметки нет")
         case "3":
             title = input(Fore.BLUE + "Введите название удаляемой заметки: ")
             if app.note_list.check_note(title):
