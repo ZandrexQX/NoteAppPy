@@ -26,9 +26,18 @@ def main(page: ft.Page):
                        )
     info_text = ft.Text()
 
+    def button_clicked(note):
+        tb1.value = note.get_title()
+        tb2.value = note.get_description()
+        page.update()
+
     def note_update():
         notes.controls.clear()
+        count = 0
+        # List notes
         for note in app.note_list.get_list():
+            a = app.note_list.get_list()[count]
+            count += 1
             notes.controls.append(
                 ft.Container(
                     width="295", height="30", bgcolor=BC, border_radius=14,
@@ -40,12 +49,10 @@ def main(page: ft.Page):
                         offset=ft.Offset(0, 0),
                         blur_style=ft.ShadowBlurStyle.OUTER,
                     ),
+                    on_click=lambda e: button_clicked(a), # not work
                     content=ft.Text(note.get_title())
                 )
             )
-    def button_clicked(e):
-        info_text.value = f"{tb1.value}"
-        page.update()
 
     def button_create(e):
         app.create_note(tb1.value, tb2.value)
@@ -85,7 +92,6 @@ def main(page: ft.Page):
         info_text.value = f"Заметки загружены"
         note_update()
         page.update()
-
 
 
     container = ft.Container(
