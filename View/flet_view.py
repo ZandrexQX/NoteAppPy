@@ -15,32 +15,32 @@ def main(page: ft.Page):
     BL = '#000000'
 
     notes = ft.Column(
-        scroll="auto"
+        scroll="auto",
     )
 
-    tb1 = ft.TextField(label="Название", width="350", bgcolor=WH, border_color=BG)
-    tb2 = ft.TextField(label="Описание", width="350", bgcolor=WH,
+    tb1 = ft.TextField(label="Название", width=350, bgcolor=WH, border_color=BG)
+    tb2 = ft.TextField(label="Описание", width=350, bgcolor=WH,
                        multiline=True,
                        min_lines=4,
                        max_lines=4,
                        )
     info_text = ft.Text()
 
-    def button_clicked(note):
-        tb1.value = note.get_title()
-        tb2.value = note.get_description()
+    def button_clicked(e):
+        # tb1.value = note.get_title()
+        # tb2.value = note.get_description()
         page.update()
 
     def note_update():
         notes.controls.clear()
         count = 0
         # List notes
-        for note in app.note_list.get_list():
-            a = app.note_list.get_list()[count]
-            count += 1
+        for i in range(10):
+            # a = app.note_list.get_list()[count]
+            # count += 1
             notes.controls.append(
                 ft.Container(
-                    width="295", height="30", bgcolor=BC, border_radius=14,
+                    width=290, height=30, bgcolor=BC, border_radius=14,
                     margin=ft.margin.symmetric(horizontal=5, vertical=5),
                     alignment=ft.alignment.center,
                     shadow=ft.BoxShadow(
@@ -49,8 +49,8 @@ def main(page: ft.Page):
                         offset=ft.Offset(0, 0),
                         blur_style=ft.ShadowBlurStyle.OUTER,
                     ),
-                    on_click=lambda e: button_clicked(a), # not work
-                    content=ft.Text(note.get_title())
+                    on_click=button_clicked, # not work
+                    # content=ft.Text(note.get_title())
                 )
             )
 
@@ -95,11 +95,11 @@ def main(page: ft.Page):
 
 
     container = ft.Container(
-        width="600", height="400",
+        width=600, height=400,
         content=ft.Column(
             controls=[
                 ft.Container(
-                    width="600", height="250", bgcolor=FWG, padding=10, border_radius=10,
+                    width=600, height=250, bgcolor=FWG, padding=10, border_radius=10,
                     shadow=ft.BoxShadow(
                         blur_radius=5,
                         color=ft.colors.BLACK,
@@ -110,7 +110,7 @@ def main(page: ft.Page):
                         controls=[
                             #Notes
                             ft.Container(
-                                width="400", height="230", border_radius=5, padding=20,
+                                width=400, height=230, border_radius=5, padding=20,
                                 content=ft.Column(
                                     controls=[
                                         tb1,
@@ -120,7 +120,7 @@ def main(page: ft.Page):
                             ),
                             # Buttons
                             ft.Container(
-                                width="170", height="230", border_radius=5, padding=6,
+                                width=170, height=230, border_radius=5, padding=6,
                                 content=ft.Column(
                                     controls=[
                                         ft.ElevatedButton(text="Создать    ", bgcolor=BC,
@@ -155,41 +155,40 @@ def main(page: ft.Page):
                 ),
                 # Down
                 ft.Container(
-                    width="600", height="300", bgcolor=FWG, border_radius=10,
+                    width=600, height=300, bgcolor=FWG, border_radius=10,
                     shadow=ft.BoxShadow(
                         blur_radius=5,
                         color=ft.colors.BLACK,
                         offset=ft.Offset(0, 0),
                         blur_style=ft.ShadowBlurStyle.OUTER,
                     ),
-                    content=ft.Container(
-                        width="600", height="300", padding=20,
-                        content=ft.Row(
-                            controls=[
-                                # info
-                                ft.Container(
-                                    width="200", height="250", bgcolor=WH, border_radius=5, padding=10,
-                                    content=info_text,
-                                    shadow=ft.BoxShadow(
-                                        spread_radius=2,
-                                        color=ft.colors.BLUE_GREY_900,
-                                    ),
+                    padding=20,
+                    content=ft.Row(
+                        controls=[
+                            # info
+                            ft.Container(
+                                width=200, height=250, bgcolor=WH, border_radius=5, padding=10,
+                                content=info_text,
+                                shadow=ft.BoxShadow(
+                                    spread_radius=2,
+                                    color=ft.colors.BLUE_GREY_900,
                                 ),
-                                #Notes list
-                                ft.Container(
-                                    width="350", height="250", bgcolor=BG, border_radius=5, padding=20,
-                                    content=notes,
-                                    shadow=ft.BoxShadow(
-                                        spread_radius=2,
-                                        blur_radius=5,
-                                        color=ft.colors.BLACK,
-                                        offset=ft.Offset(0, 0),
-                                        blur_style=ft.ShadowBlurStyle.OUTER,
-                                    ),
+                            ),
+                            #Notes list
+                            ft.Container(
+                                width=350, height=250, bgcolor=BG, border_radius=5, padding=20,
+                                content=notes,
+                                shadow=ft.BoxShadow(
+                                    spread_radius=2,
+                                    blur_radius=5,
+                                    color=ft.colors.BLACK,
+                                    offset=ft.Offset(0, 0),
+                                    blur_style=ft.ShadowBlurStyle.OUTER,
                                 ),
-                            ]
-                        )
+                            ),
+                        ]
                     )
+
                 ),
                 # Text App
                 ft.Row(
