@@ -48,7 +48,7 @@ def main(page: ft.Page):
                         offset=ft.Offset(0, 0),
                         blur_style=ft.ShadowBlurStyle.OUTER,
                     ),
-                    on_click=lambda e, n=Note(note.get_title(), note.get_description()): button_clicked(n),
+                    on_click=lambda e, n=note: button_clicked(n),
                     content=ft.Text(note.get_title())
                 )
             )
