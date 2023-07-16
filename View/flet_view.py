@@ -35,6 +35,7 @@ def main(page: ft.Page):
         notes.controls.clear()
         # List notes
         for note in app.note_list.get_list():
+            a = Note(note.get_title(), note.get_description())
             notes.controls.append(
                 ft.Container(
                     width=290, height=30, bgcolor=BC, border_radius=14,
@@ -46,7 +47,7 @@ def main(page: ft.Page):
                         offset=ft.Offset(0, 0),
                         blur_style=ft.ShadowBlurStyle.OUTER,
                     ),
-                    # on_click=lambda _: button_clicked(note), # not work
+                    on_click=lambda e, n=Note(note.get_title(), note.get_description()): button_clicked(n),
                     content=ft.Text(note.get_title())
                 )
             )
