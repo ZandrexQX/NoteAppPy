@@ -25,6 +25,7 @@ def main(page: ft.Page):
                        max_lines=4,
                        )
     info_text = ft.Text()
+    info_text.value = ""
 
     def button_clicked(note):
         tb1.value = note.get_title()
@@ -55,7 +56,7 @@ def main(page: ft.Page):
     def button_create(e):
         app.create_note(tb1.value, tb2.value)
         app.add_list()
-        info_text.value = f"Заметка {tb1.value} создана"
+        info_text.value = f"{info_text.value}Заметка {tb1.value} создана\n"
         note_update()
         page.update()
 
@@ -64,30 +65,30 @@ def main(page: ft.Page):
             note = app.note_list.get_note(tb1.value)
             descr = tb2.value
             note.set_description(descr)
-            info_text.value = f"Заметка {tb1.value} изменена"
+            info_text.value = f"{info_text.value}Заметка {tb1.value} изменена\n"
             page.update()
         else:
-            info_text.value = f"Заметки {tb1.value} нет"
+            info_text.value = f"{info_text.value}Заметки {tb1.value} нет\n"
             page.update()
 
     def button_delete(e):
         if app.note_list.check_note(tb1.value):
             app.del_note(tb1.value)
-            info_text.value = f"Заметка {tb1.value} удалена"
+            info_text.value = f"{info_text.value}Заметка {tb1.value} удалена\n"
             note_update()
             page.update()
         else:
-            info_text.value = f"Заметки {tb1.value} нет"
+            info_text.value = f"{info_text.value}Заметки {tb1.value} нет\n"
             page.update()
 
     def button_save(e):
         app.save_notes()
-        info_text.value = f"Заметки сохранены"
+        info_text.value = f"{info_text.value}Заметки сохранены\n"
         page.update()
 
     def button_load(e):
         app.read_from_csv()
-        info_text.value = f"Заметки загружены"
+        info_text.value = f"{info_text.value}Заметки загружены\n"
         note_update()
         page.update()
 
