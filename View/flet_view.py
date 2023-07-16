@@ -39,7 +39,7 @@ def main(page: ft.Page):
             a = Note(note.get_title(), note.get_description())
             notes.controls.append(
                 ft.Container(
-                    width=290, height=30, bgcolor=BC, border_radius=14,
+                    width=200, height=30, bgcolor=BC, border_radius=14,
                     margin=ft.margin.symmetric(horizontal=5, vertical=5),
                     alignment=ft.alignment.center,
                     shadow=ft.BoxShadow(
@@ -152,7 +152,7 @@ def main(page: ft.Page):
         )
     )
     cont_info = ft.Container(
-        width=200, height=250, bgcolor=WH, border_radius=5, padding=10,
+        width=300, height=250, bgcolor=WH, border_radius=5, padding=10,
         content=info_text,
         shadow=ft.BoxShadow(
             spread_radius=2,
@@ -160,7 +160,7 @@ def main(page: ft.Page):
         ),
     )
     cont_list = ft.Container(
-        width=350, height=250, bgcolor=BG, border_radius=5, padding=20,
+        width=250, height=250, bgcolor=BG, border_radius=5, padding=20,
         content=notes,
         shadow=ft.BoxShadow(
             spread_radius=2,
